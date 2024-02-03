@@ -1,16 +1,16 @@
-# Baza Danych Muzeum - Bazy danych 23/24
+# Baza Danych Muzeum - BD 23/24
 
 Celem projektu jest opracowanie bazy danych dla muzeum, mającej ułatwić zarządzanie jego działalnością. Projekt koncentruje się na optymalizacji procesów związanych z wystawami, dziełami sztuki, odwiedzającymi i personelem.
 
+
 ### Tabele
 
-Kluczowymi elementami projektu są tabele przechowujące dane dotyczące artystów, epok, wystaw  dzieł sztuki wraz z ich specyficznymi kategoriami takimi jak malarstwo, fotografie, rzeźby, a także informacje o biletach, odwiedzających, statystykach, przewodnikachoraz wycieczkach. 
+Kluczowymi elementami projektu są tabele przechowujące dane dotyczące artystów, epok, wystaw  dzieł sztuki wraz z ich kategoriami takimi jak malarstwo, fotografie, rzeźby, a także informacje o biletach, odwiedzających, statystykach, przewodnikach oraz wycieczkach. 
 
-Dzięki tak zorganizowanej bazie, muzeum będzie mogło nie tylko efektywnie zarządzać swoimi zasobami, ale również prowadzić analizy dotyczące popularności poszczególnych eksponatów czy wystaw, co może przyczynić się do lepszego planowania przyszłych projektów i wydarzeń.
+Dzięki tak zorganizowanej bazie, muzeum będzie mogło nie tylko efektywnie zarządzać swoimi zasobami, ale również prowadzić analizy dotyczące poszczególnych eksponatów czy wystaw, co może przyczynić się do lepszego planowania przyszłych projektów i wydarzeń.
 
-Tworzenie bazy danych i tabel, włącznie z dodatkowymi więzami integralności jest zaprezentowane w [skrypcie](script.sql). 
+Tworzenie bazy danych i tabel, włącznie z dodatkowymi więzami integralności jest zaprezentowane w [skrypcie](script.sql). W celu umożliwienia testowania i demonstracji funkcjonalności bazy danych, przygotowany został [zestaw danych testowych](test_input.sql), objemujący przykładowe rekordy dla każdej z tabel.
 
-W celu umożliwienia testowania i demonstracji funkcjonalności bazy danych, przygotowany został [zestaw danych testowych](test_input.sql), objemujący przykładowe rekordy dla każdej z tabel, ułatwiając szybką weryfikację i testowanie funkcjonalności oraz więzów integralności.
 
 ### Pielęgnacja Bazy Danych
 
@@ -24,7 +24,7 @@ Aby nie utracić danych dotyczących muzeum, należy tworzyć różnicową kopi�
 
 Są zdefiniowane dla zestawów danych, które mogłyby być często kwerendowane.
 
-Pierwszy wyświetla szczegóły wycieczek, posortowane pod względem języków przewodników.
+Pierwszy wyświetla szczegóły wycieczek, posortowane według języków przewodników.
 
 ```sql
 CREATE VIEW ToursByLanguage AS
@@ -34,7 +34,7 @@ FROM Tour t
 JOIN Guide g ON t.GuideID = g.GuideID;
 ```
 
-W kolejnych widokach mamy wybrane szczegóły dotyczące dzieł, które są wyświetlane kolejno od najwcześniej do najpóźniejszej epoki, oraz od najdroższego do najtańszego. Dzięki funkcjom rankingowym możemy łatwo zidentyfikować, która (chronologicznie) jest epoka danego dzieła, oraz które w rankingu ceny jest dane dzieło.
+W kolejnych widokach mamy szczegóły dotyczące dzieł, które są wyświetlane kolejno od najwcześniej do najpóźniejszej epoki, oraz od najdroższego do najtańszego. Dzięki funkcjom rankingowym możemy łatwo zidentyfikować, w której (chronologicznie) epoce oraz które w rankingu ceny jest dane dzieło.
 
 ```sql
 CREATE VIEW ArtworksByEpoch AS
@@ -51,7 +51,7 @@ SELECT a.ArtworkID, a.Title, a.PriceEstimate,
 FROM Artwork a;
 ```
 
-Te widoki wykorzystują funkcje **`**GETDATE()**`** oraz **`**DATEDIFF()**`**, aby wyświetlić dane odnoszące się do przeszłości i przyszłości.
+Te widoki wykorzystują funkcje `GETDATE()` oraz `DATEDIFF()`, aby wyświetlić dane odnoszące się do przeszłości i przyszłości.
 
 ```sql
 CREATE VIEW UpcomingExhibitions AS
@@ -86,7 +86,7 @@ SELECT * FROM UpcomingExhibitions;
 
 # Funkcje
 
-Służą do szybkiego wyszukania danych zależnych od parametrów 
+Służą do szybkiego wyszukania danych zależnych od konkretnych parametrów, takich jak ID odwiedzającego, czy data, w której dzieło ma być dostępne.
 
 Poniższa funkcja zwraca tabelę z wycieczkami w języku danego odwiedzającego, w dniach, w które ma zakupione bilety.
 
@@ -113,7 +113,7 @@ SELECT * FROM dbo.offer_tour(4);
 
 Kolejne funkcje zwracają wartości, kolejno:
 
-- dostępność danego dzieła w danym dniu (1/0)
+dostępność danego dzieła w danym dniu (1/0)
 
 ```sql
 CREATE FUNCTION check_artwork_availability(@ArtworkID INT, @RequiredDate DATE)
@@ -131,7 +131,7 @@ BEGIN
 END;
 ```
 
-- liczbę dzieł w danej epoce
+liczbę dzieł w danej epoce
 
 ```sql
 CREATE FUNCTION count_artworks_in_epoch(@EpochID INT)
@@ -146,7 +146,7 @@ BEGIN
 END;
 ```
 
-- szacowaną wartość wystawy
+szacowaną wartość wystawy
 
 ```sql
 CREATE FUNCTION estimate_exhibition_value(@ExhibitionID INT)
