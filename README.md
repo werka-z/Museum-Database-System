@@ -20,6 +20,10 @@ Aby nie utracić danych dotyczących muzeum, należy tworzyć różnicową kopi�
 
 ![](ER_diagram_SSMS.png)
 
+# Schemat Bazy Danych
+
+![](db_schema_SSMS.png)
+
 # Widoki
 
 Są zdefiniowane dla zestawów danych, które mogłyby być często kwerendowane.
