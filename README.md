@@ -22,7 +22,7 @@ Aby nie utracić danych dotyczących muzeum, należy tworzyć różnicową kopi�
 
 # Schemat Bazy Danych
 
-![](db_schema_SSMS.png)
+![](DB_schema_SSMS.png)
 
 # Widoki
 
