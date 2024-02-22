@@ -18,11 +18,7 @@ Aby nie utracić danych dotyczących muzeum, należy tworzyć różnicową kopi�
 
 # Diagram ER
 
-![](ER_diagram_SSMS.png)
-
-# Schemat Bazy Danych
-
-![](DB_schema_SSMS.png)
+![](ER_diagram_DrawSQL.png)
 
 # Widoki
 
