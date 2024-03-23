@@ -5,7 +5,7 @@ Thanks to such an organized database, the museum will be able to manage its reso
 
 ### Key components
 - the tables used are visible in the [ER diagram](ER_diagram_DrawSQL.png)
-- the creation of the database is presented in the [script](sript.sql); key parts are described in this README file
+- the creation of the database is presented in the [script](script.sql); key parts are described in this README file
 - to enable testing and demonstration of database functionalities, a [test data set](test_input.sql) has been prepared
 
 ## ER Diagram
@@ -75,7 +75,7 @@ The simplest use of these views:
 SELECT * FROM UpcomingExhibitions;
 ```
 
-# Functions
+## Functions
 
 They serve to quickly find data depending on specific parameters, such as the ID of a visitor or the date on which the artwork is to be available.
 The following function returns a table with tours in the language of the given visitor, on days when they have purchased tickets.
